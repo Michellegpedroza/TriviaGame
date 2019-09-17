@@ -26,7 +26,31 @@ const questions = [{
 ]
 
 let score = 0
+let time = 10
+
+let seconds = setInterval(function () {
+  document.getElementById(`countdown`).innerHTML = timeleft + ` seconds remaining`
+  timeleft -= 1;
+  if (timeleft <= 0) {
+    clearInterval(downloadTimer);
+    document.getElementById(`countdown`).innerHTML = `Time's Up!`
+  }
+}, 1000);
+
+document.getElementById(`myTimer`).innerHTML = seconds
 
 const ask = () => {
-  let choices = 
+  for (let i = 0; i < questions.length; i++) {
+    let question = document.getElementById(`myQuestion`).innerHTML = questions[i].question
+    let choice1 = document.getElementById(`choice1`).innerHTML = questions[i].choices[0]
+    let choice2 = document.getElementById(`choice2`).innerHTML = questions[i].choices[1]
+    let choice3 = document.getElementById(`choice3`).innerHTML = questions[i].choices[2]
+    let choice4 = document.getElementById(`choice4`).innerHTML = questions[i].choices[3]
+
+  }
 }
+ask()
+
+
+
+
