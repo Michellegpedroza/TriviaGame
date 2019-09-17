@@ -29,15 +29,14 @@ let score = 0
 let time = 10
 
 let seconds = setInterval(function () {
-  document.getElementById(`countdown`).innerHTML = timeleft + ` seconds remaining`
-  timeleft -= 1;
-  if (timeleft <= 0) {
-    clearInterval(downloadTimer);
-    document.getElementById(`countdown`).innerHTML = `Time's Up!`
+  document.getElementById(`myTimer`).innerHTML = time + ` seconds remaining`
+  time -= 1;
+  if (time <= 0) {
+    clearInterval(seconds);
+    document.getElementById(`myTimer`).innerHTML = `Times Up!`
   }
 }, 1000);
 
-document.getElementById(`myTimer`).innerHTML = seconds
 
 const ask = () => {
   for (let i = 0; i < questions.length; i++) {
