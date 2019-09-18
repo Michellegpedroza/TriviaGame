@@ -26,92 +26,90 @@ const questions = [{
 }
 ]
 
-// Variables
-//Question & Choices variables
-let question = document.getElementById(`myQuestion`)
-let choice1 = document.getElementById(`choice1`)
-let choice2 = document.getElementById(`choice2`)
-let choice3 = document.getElementById(`choice3`)
-let choice4 = document.getElementById(`choice4`)
-
 // Score at the end of the game variables
 let correctA = 0
 let wrongA = 0
 
 //Timer variable
-let time = 15
+let timeLimit = 10
+let timePassed = 0
+//Miliseconds between each iteration
+let interval = 1000
+let questionNum = 0
+//This variable stores the interval set for each question
+let countDown;
 
-let timer = () => {
-  // Countdown Timer
-  const seconds = setInterval(function () {
-    document.getElementById(`myTimer`).innerHTML = time + ` seconds remaining`
-    time -= 1;
-    if (time <= 0) {
-      clearInterval(seconds);
-      document.getElementById(`myTimer`).innerHTML = `Times Up!`
-    }
-  }, 1000);
+function showQuestion() {
+  let question = document.getElementById(`myQuestion`)
+  let choice1 = document.getElementById(`choice1`)
+  let choice2 = document.getElementById(`choice2`)
+  let choice3 = document.getElementById(`choice3`)
+  let choice4 = document.getElementById(`choice4`)
+
+  question.innerHTML = questions[questionNum].question
+  //Choices
+  choice1.innerHTML = questions[questionNum].choices[0]
+  choice2.innerHTML = questions[questionNum].choices[1]
+  choice3.innerHTML = questions[questionNum].choices[2]
+  choice4.innerHTML = questions[questionNum].choices[3]
+
+  //Answer to question
+  let answer = questions[questionNum].answer
+
+  //If correct button is green, if wrong button is red
+  let choices = document.querySelectorAll(`.choices`)
+  for (let x = 0; x < choices.length; x++) {
+    //Resets styling in case of click or a correct answer
+    choices[x].style.backgroundColor = `white`
+    choices[x].addEventListener(`click`, () => {
+      if (choices[x].value === answer) {
+
+        choices[x].style.backgroundColor = `green`
+        choices[x].getElementsByTagName(`span`)[0].innerHTML = `Correct!!!`
+        correctA++
+        timePassed = 0
+        clearInterval(countDown)
+        questionNum++
+        setTimeout(initializeQuestion, 2000);
+      } else {
+        choices[x].style.backgroundColor = `red`
+        choices[x].getElementsByTagName(`span`)[0].innerHTML = `WRONG!`
+
+        wrongA++
+      }
+
+    })
+  }
 }
 
-timer()
-//First Question
-let myQuestion = question.innerHTML = questions[0].question
-//Choices
-choice1.innerHTML = questions[0].choices[0]
-choice2.innerHTML = questions[0].choices[1]
-choice3.innerHTML = questions[0].choices[2]
-choice4.innerHTML = questions[0].choices[3]
+function intervalFunction() {
+  console.log(`new iteration`)
+  timePassed = timePassed + interval / 1000;
+  document.getElementById(`myTimer`).innerHTML = timeLimit - timePassed + ` seconds remaining`
+  if (timePassed >= timeLimit) {
+    timesUp()
+  }
+}
 
-//Answer to question
-let answer = questions[0].answer
-
-//If correct button is green, if wrong button is red
-let choices = document.querySelectorAll(`.choices`)
-for (let x = 0; x < choices.length; x++) {
-  choices[x].addEventListener(`click`, () => {
-    if (choices[x].value === answer) {
+function timesUp() {
+  document.getElementById(`myTimer`).innerHTML = `Times Up!`
+  timePassed = 0
+  clearInterval(countDown)
+  let choices = document.querySelectorAll(`.choices`)
+  for (let x = 0; x < choices.length; x++) {
+    if (choices[x].value === questions[questionNum].answer) {
       choices[x].style.backgroundColor = `green`
-      choices[x].innerHTML = `Correct!!!`
-
-      correctA++
-
-    } else {
-      choices[x].style.backgroundColor = `red`
-      choices[x].innerHTML = `WRONG!`
-
-      wrongA++
     }
-
-  })
+  }
+  questionNum++
+  setTimeout(initializeQuestion, 3000);
 }
 
-//
-// const ask = () => {
-//   // Looping through the questions
-//   //WOULD IT BE BEST TO USE THE FOREACH METHOD?//
-//   for (let i = 0; i < questions.length; i++) {
-//     let myQuestion = question.innerHTML = questions[i].question
+function initializeQuestion() {
+  console.log(questionNum)
+  showQuestion()
+  document.getElementById(`myTimer`).innerHTML = timeLimit - timePassed + ` seconds remaining`
+  countDown = setInterval(intervalFunction, interval);
+}
 
-//     choice1.innerHTML = questions[i].choices[0]
-//     choice2.innerHTML = questions[i].choices[1]
-//     choice3.innerHTML = questions[i].choices[2]
-//     choice4.innerHTML = questions[i].choices[3]
-
-//     let answer = questions[i].answer
-//     console.log(myQuestion)
-//     console.log(answer)
-
-//     let choices = document.querySelectorAll(`.choices`)
-//     //Looping through buttons
-//     for (let x = 0; x < choices.length; x++) {
-//       choices[x].addEventListener(`click`, () => {
-
-//       })
-//     }
-
-//   }
-// }
-
-// questions.forEach(ask){
-
-// }
+initializeQuestion()
