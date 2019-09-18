@@ -30,7 +30,7 @@ const questions = [{
 let correctA = 0
 let wrongA = 0
 
-//Timer variable
+//Timer variables
 let timeLimit = 10
 let timePassed = 0
 //Miliseconds between each iteration
@@ -39,15 +39,18 @@ let questionNum = 0
 //This variable stores the interval set for each question
 let countDown;
 
+//Shows Game Question
 function showQuestion() {
+  //variables
   let question = document.getElementById(`myQuestion`)
   let choice1 = document.getElementById(`choice1`)
   let choice2 = document.getElementById(`choice2`)
   let choice3 = document.getElementById(`choice3`)
   let choice4 = document.getElementById(`choice4`)
 
+  //Display Question
   question.innerHTML = questions[questionNum].question
-  //Choices
+  //Display Choices
   choice1.innerHTML = questions[questionNum].choices[0]
   choice2.innerHTML = questions[questionNum].choices[1]
   choice3.innerHTML = questions[questionNum].choices[2]
@@ -56,14 +59,16 @@ function showQuestion() {
   //Answer to question
   let answer = questions[questionNum].answer
 
-  //If correct button is green, if wrong button is red
+  //Choices Selects all my choice buttons
   let choices = document.querySelectorAll(`.choices`)
+  //Loop through choice buttons
   for (let x = 0; x < choices.length; x++) {
-    //Resets styling in case of click or a correct answer
+    //Resets styling in case of click of a correct answer
     choices[x].style.backgroundColor = `white`
+    choices[x].style.color = `black`
+    //When clicking a choice the following executes
     choices[x].addEventListener(`click`, () => {
       if (choices[x].value === answer) {
-
         choices[x].style.backgroundColor = `green`
         choices[x].getElementsByTagName(`span`)[0].innerHTML = `Correct!!!`
         correctA++
@@ -74,13 +79,13 @@ function showQuestion() {
       } else {
         choices[x].style.backgroundColor = `red`
         choices[x].getElementsByTagName(`span`)[0].innerHTML = `WRONG!`
-
         wrongA++
       }
-
     })
   }
 }
+
+//Counter Functions
 
 function intervalFunction() {
   console.log(`new iteration`)
