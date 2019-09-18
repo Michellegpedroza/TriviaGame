@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
- <!-- Custom CSS -->
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="./assets/css/style.css">
   <!-- Favicon -->
   <link rel="icon" href="assets/images/musicIcon.png">
@@ -18,22 +19,28 @@
 
 <body>
   <div class="container jumbotron mt-5">
-      <h1 class="display-4 text-center">Music Trivia Game!</h1>
-      <hr class="my-4">
+    <h1 class="display-4 text-center">Music Trivia Game!</h1>
+    <hr class="my-4">
     <!-- Timer -->
-      <p class="lead text-center pt-3 font-weight-bold">Time: <span class="font-weight-normal"  id="myTimer"></span></p>
-  <!-- Game Questions -->
-      <p class="text-center pt-3"><span class=" lead font-weight-bold" id="myQuestion"></span></p>
-      
-    <!-- Choices -->
-      <div class="container text-center lead pt-4">
-        <button type="button" class="btn btn-outline-dark btn-lg btn-block" value="0"><span id="choice1"> </span></button>
-        <button type="button" class="btn btn-outline-dark btn-lg btn-block" value="1"><span id="choice2"> </span></button>
-        <button type="button" class="btn btn-outline-dark btn-lg btn-block" value="2"><span id="choice3"> </span></button>
-        <button type="button" class="btn btn-outline-dark btn-lg btn-block" value="3"><span id="choice4"> </span></button>
-      </div>
+    <p class="lead text-center pt-3 font-weight-bold">Time: <span class="font-weight-normal" id="myTimer"></span></p>
 
-      <div id="result"></div>
+    <!-- Game Question -->
+    <p class="text-center pt-3"><span class=" lead font-weight-bold" id="myQuestion"></span></p>
+
+    <!-- Choices Buttons -->
+    <div class="container text-center lead pt-4">
+      <button type="button" class="btn btn-outline-dark btn-lg btn-block choices" value="0"><span class="choices"
+          id="choice1"> </span></button>
+      <button type="button" class="btn btn-outline-dark btn-lg btn-block choices" value="1"><span class="choices"
+          id="choice2"> </span></button>
+      <button type="button" class="btn btn-outline-dark btn-lg btn-block choices" value="2"><span id="choice3">
+        </span></button>
+      <button type="button" class="btn btn-outline-dark btn-lg btn-block choices " value="3"><span id="choice4">
+        </span></button>
+    </div>
+
+    <!-- End Score Results -->
+    <div id="result"></div>
 
   </div>
 
