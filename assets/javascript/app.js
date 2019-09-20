@@ -41,7 +41,7 @@ let countDown;
 
 //Shows Game Question
 function showQuestion() {
-  //variables
+  //Variables
   let question = document.getElementById(`myQuestion`)
   let choice1 = document.getElementById(`choice1`)
   let choice2 = document.getElementById(`choice2`)
@@ -86,8 +86,7 @@ function showQuestion() {
 }
 
 //Counter Functions
-
-function intervalFunction() {
+const intervalFunction = () => {
   console.log(`new iteration`)
   timePassed = timePassed + interval / 1000;
   document.getElementById(`myTimer`).innerHTML = timeLimit - timePassed + ` seconds remaining`
@@ -96,8 +95,8 @@ function intervalFunction() {
   }
 }
 
-function timesUp() {
-  document.getElementById(`myTimer`).innerHTML = `Times Up!`
+const timesUp = () => {
+  document.getElementById(`myTimer`).innerHTML = `Time's Up!`
   timePassed = 0
   clearInterval(countDown)
   let choices = document.querySelectorAll(`.choices`)
@@ -110,7 +109,7 @@ function timesUp() {
   setTimeout(initializeQuestion, 3000);
 }
 
-function initializeQuestion() {
+const initializeQuestion = () => {
   console.log(questionNum)
   showQuestion()
   document.getElementById(`myTimer`).innerHTML = timeLimit - timePassed + ` seconds remaining`
